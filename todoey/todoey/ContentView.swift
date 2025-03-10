@@ -24,7 +24,7 @@ struct ContentView: View {
     @State private var editingIndex: UUID?
     @FocusState private var isTextFieldFocused: Bool
     
-    @State private var title: String = "Tadoey"
+    @State private var title: String = "Todoey"
     @State private var selectedColor: Color = .yellow
     @State private var isShowingSheet: Bool = false
 
