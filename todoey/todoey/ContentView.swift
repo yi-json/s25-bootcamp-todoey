@@ -23,19 +23,35 @@ struct ContentView: View {
     
     @State private var editingIndex: UUID?
     @FocusState private var isTextFieldFocused: Bool
+    
+    @State private var title: String = "Tadoey"
+    @State private var selectedColor: Color = .yellow
+    @State private var isShowingSheet: Bool = false
 
     
     var body: some View {
         NavigationStack {
             VStack {
-                Text("Todoey")
-                    .font(.largeTitle)
-                    .foregroundStyle(.yellow)
-                    .bold()
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, 20)
-                    .padding(.top)
-                    .padding(.bottom, -40)
+                HStack {
+                    Text(title)
+                        .font(.largeTitle)
+                        .bold()
+                    Spacer()
+                    Button {
+                        isShowingSheet = true
+                    } label: {
+                        Image(systemName: "info.circle")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                    }
+                }
+                .foregroundStyle(selectedColor)
+                .padding(.horizontal, 20)
+                .padding(.top)
+                .padding(.bottom, -20)
+                .sheet(isPresented: $isShowingSheet) {
+                    InfoView(title: $title, selectedColor: $selectedColor)
+                }
 
                 List {
                     ForEach($todos) { $todo in
@@ -44,12 +60,12 @@ struct ContentView: View {
                                 todo.isDone.toggle()
                             } label: {
                                 Image(systemName: todo.isDone ? "circle.fill" : "circle")
-                                    .foregroundStyle(.yellow)
+                                    .foregroundStyle(selectedColor)
             
                             }
                             if editingIndex == todo.id {
                                 TextField("", text: $todo.item)
-                                    .foregroundStyle(.white)
+                                    .foregroundStyle(todo.isDone ? .gray : .white)
                                     .focused($isTextFieldFocused)
                             } else {
                                 Text(todo.item)
@@ -70,14 +86,14 @@ struct ContentView: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.title2)
-                .foregroundStyle(.yellow)
+                .foregroundStyle(selectedColor)
                 .padding(.horizontal)
                 .padding(.bottom)
                 .bold()
                 
 
             }
-            .background(Color.black.ignoresSafeArea())
+            .background(Color.black.edgesIgnoringSafeArea(.all))
         }
     
 
