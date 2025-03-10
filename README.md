@@ -2,7 +2,7 @@
 ## Project 3
 
 <p align="center">
-  <img src="screenshots/project3.png" alt="App Screenshot" width="500">
+  <img src="assets/project3.png" alt="App Screenshot" width="500">
 </p>
 
 ---
@@ -15,7 +15,7 @@
 
 ## Project 4
 <p align="center">
-  <img src="screenshots/project4.gif" alt="App Recording" width="500">
+  <img src="assets/project4.gif" alt="App Recording" width="500">
 </p>
 
 ### Project 4 Features
