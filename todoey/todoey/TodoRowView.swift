@@ -10,6 +10,7 @@ import SwiftUI
 struct TodoRowView: View {
     @Binding var todo: Todo
     var editingIndex: UUID?
+    var selectedColor: Color
     @FocusState private var isTextFieldFocused: Bool
     
     var body: some View {
@@ -18,16 +19,13 @@ struct TodoRowView: View {
                 todo.isDone.toggle()
             } label: {
                 Image(systemName: todo.isDone ? "circle.fill" : "circle")
-                    .foregroundStyle(.yellow)
+                    .foregroundStyle(selectedColor)
 
             }
             if editingIndex == todo.id {
                 TextField("", text: $todo.item)
-                    .foregroundStyle(.white)
+                    .foregroundStyle(todo.isDone ? .gray : .white)
                     .focused($isTextFieldFocused)
-                    .onAppear {
-                        isTextFieldFocused = true
-                    }
             } else {
                 Text(todo.item)
                     .foregroundStyle(todo.isDone ? .gray : .white)

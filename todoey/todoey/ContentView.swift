@@ -55,24 +55,7 @@ struct ContentView: View {
 
                 List {
                     ForEach($todos) { $todo in
-                        HStack {
-                            Button {
-                                todo.isDone.toggle()
-                            } label: {
-                                Image(systemName: todo.isDone ? "circle.fill" : "circle")
-                                    .foregroundStyle(selectedColor)
-            
-                            }
-                            if editingIndex == todo.id {
-                                TextField("", text: $todo.item)
-                                    .foregroundStyle(todo.isDone ? .gray : .white)
-                                    .focused($isTextFieldFocused)
-                            } else {
-                                Text(todo.item)
-                                    .foregroundStyle(todo.isDone ? .gray : .white)
-                            }
-                        }
-                        .listRowBackground(Color.black)
+                        TodoRowView(todo: $todo, editingIndex: editingIndex, selectedColor: selectedColor)
                     }
                     .onDelete(perform: deleteTask)
 
